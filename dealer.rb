@@ -11,4 +11,9 @@ class Dealer < Gambler
     @cards_open ? @cards : @cards.map{"*"}
   end
 
+  def reset_cards
+    super
+    @cards_open = false
+  end
+
 end
