@@ -52,22 +52,22 @@ class Interface
     add_card(@dealer) if @dealer.score <= 17
   end
 
+  def exceed_limit?(gambler)
+    gambler.score > 21
+  end
+
   def end_round
     open_cards
 
+    return dealer_wins if exceed_limit?(@player)
+    return player_wins if exceed_limit?(@dealer)
+
     if @player.score == @dealer.score
       draw
-    elsif @player.score > 21
-      puts 'You have exceed the score.'
-      dealer_wins
-    elsif @dealer.score > 21
-      puts 'Dealer had exceed the score.'
+    elsif @player.score > @dealer.score
       player_wins
-    elsif @player.score > @dealer.score && @dealer.score <= 21
-      player_wins
-    elsif @dealer.score > @player.score && @player.score <= 21
+    elsif @dealer.score > @player.score
       dealer_wins
-    else raise 'Unhandled condition.'
     end
   end
 
