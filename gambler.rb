@@ -1,5 +1,6 @@
-class Gambler
+# frozen_string_literal: true
 
+class Gambler
   attr_accessor :cards
   attr_reader :score, :name, :money
 
@@ -37,5 +38,4 @@ class Gambler
   private
 
   attr_writer :score, :money
-
 end

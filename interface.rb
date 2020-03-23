@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Interface
   include Cards
 
@@ -9,13 +11,12 @@ class Interface
   end
 
   def start
-
     loop do
-    [@player, @dealer].each do |gambler|
-      2.times{ add_card(gambler) }
-      gambler.make_bet
-      @game_bank += 10
-    end
+      [@player, @dealer].each do |gambler|
+        2.times { add_card(gambler) }
+        gambler.make_bet
+        @game_bank += 10
+      end
 
       puts "Your money: #{@player.money}, dealer's money: #{@dealer.money}."
       puts "You have cards: #{@player.cards}, your score: #{@player.score}."
@@ -29,34 +30,23 @@ class Interface
       when /skip/
         dealer_action
       when /open\s*cards/
-        
+        puts "You have opened your cards."
       else
-        puts "Unknown command. Try again."
+        puts 'Unknown command. Try again.'
         redo
       end
 
       end_round
-      puts "Want to play more? y/n"
+      puts 'Want to play more? y/n'
       answer = gets.chomp
 
       break if answer.match?(/\s*no*\s*/)
+
       reset_game
-
     end
-
   end
 
   private
-
-  def take_card
-    add_card(@player)
-
-    return if @player.score > 21
-
-    dealer_action
-  end
-
-
 
   def dealer_action
     add_card(@dealer) if @dealer.score <= 17
@@ -65,19 +55,19 @@ class Interface
   def end_round
     open_cards
 
-    if @player.score == @dealer.score 
+    if @player.score == @dealer.score
       draw
     elsif @player.score > 21
-      puts "You have exceed the score."
+      puts 'You have exceed the score.'
       dealer_wins
     elsif @dealer.score > 21
-      puts "Dealer had exceed the score."
+      puts 'Dealer had exceed the score.'
       player_wins
     elsif @player.score > @dealer.score && @dealer.score <= 21
       player_wins
     elsif @dealer.score > @player.score && @player.score <= 21
       dealer_wins
-    else raise "Unhandled condition."
+    else raise 'Unhandled condition.'
     end
   end
 
@@ -92,8 +82,8 @@ class Interface
   end
 
   def draw
-    puts "Draw."
-    [@player, @dealer].each{ |gambler| gambler.draw }
+    puts 'Draw.'
+    [@player, @dealer].each(&:draw)
   end
 
   def reset_game
@@ -101,7 +91,6 @@ class Interface
       gambler.reset_score
       gambler.reset_cards
     end
-    puts "Starting new round..."
+    puts 'Starting new round...'
   end
-
 end

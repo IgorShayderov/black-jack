@@ -1,11 +1,10 @@
 module Cards
-
   private
 
   def initialize_cards
     card_pack = {}
-    card_types = ["♧", "♥", "♤", "♦"]
-    high_cards = ["V", "Q", "K"]
+    card_types = %w[♧ ♥ ♤ ♦]
+    high_cards = %w[V Q K]
     high_card_score = 10
 
     card_types.each do |type|
@@ -27,6 +26,14 @@ module Cards
     current_score + 11 <= win_score ? 11 : 1
   end
 
+  def take_card
+    add_card(@player)
+
+    return if @player.score > 21
+
+    dealer_action
+  end
+
   def random_card
     card_num = rand(0...@cards.keys.length)
     @cards.keys[card_num]
@@ -46,5 +53,4 @@ module Cards
     puts "Your cards: #{@player.cards}."
     puts "Dealer's cards: #{@dealer.cards}."
   end
-
 end

@@ -1,5 +1,6 @@
-class Dealer < Gambler
+# frozen_string_literal: true
 
+class Dealer < Gambler
   attr_writer :cards_open
 
   def initialize(name)
@@ -8,12 +9,11 @@ class Dealer < Gambler
   end
 
   def show_cards
-    @cards_open ? @cards : @cards.map{"*"}
+    @cards_open ? @cards : @cards.map { '*' }
   end
 
   def reset_cards
     super
     @cards_open = false
   end
-
 end
