@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require './modules/card_actions.rb'
-require './modules/game_actions.rb'
+require_relative 'cards'
+require_relative 'game'
 require_relative 'gambler'
 require_relative 'interface'
 require_relative 'dealer'
@@ -16,4 +16,4 @@ puts "'open cards' to open your cards."
 player = Gambler.new(name)
 dealer = Dealer.new('Dealer')
 
-Interface.new(player, dealer).start
+Game.new(Interface.new, player, dealer, Cards.new).start

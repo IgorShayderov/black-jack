@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
 class Gambler
+  START_MONEY = 100
+
   attr_accessor :cards
   attr_reader :score, :name, :money
 
   def initialize(name)
     @name = name
-    @money = 10
+    @money = START_MONEY
     @score = 0
     @cards = []
   end

@@ -1,47 +1,41 @@
 # frozen_string_literal: true
 
 class Interface
-  include CardActions
-  include GameActions
 
-  def initialize(player, dealer)
-    @cards = initialize_cards
-    @player = player
-    @dealer = dealer
+  def show_status(player, dealer)
+    puts "Your money: #{player.money}, dealer's money: #{dealer.money}."
+    puts "You have cards: #{player.cards}, your score: #{player.score}."
+    puts "Dealers cards: #{dealer.show_cards}."
   end
 
-  def start
-    loop do
-      start_round
-      input = gets.chomp
-
-      case input
-      when /add\s*card/
-        take_card
-      when /skip/
-        dealer_action
-      when /open\s*cards/
-        puts 'You have opened your cards.'
-      else
-        puts 'Unknown command. Try again.'
-        redo
-      end
-
-      end_round
-      p should_end_game
-      break if should_end_game
-      redo if !should_end_game
-
-      break if !play_more?
-
-      reset_game
-    end
+  def action_open_cards
+    puts 'You have opened your cards.'
   end
 
-  def should_end_game
-    [@player, @dealer].each do |gambler|
-      return end_game(gambler) if !have_money?(gambler)
-    end
-    false
+  def action_unknown_command
+    puts 'Unknown command. Try again.'
   end
+
+  def game_result(player, result)
+    puts "#{player.name}, you #{result}."
+  end
+
+  def player_lost_money
+    puts "You lost all your money."
+  end
+
+  def dealer_lost_money
+    puts "Dealer lost all his money. You won."
+  end
+
+  def ask_for_more
+    puts 'Want to play more? y/n'
+  end
+
+  def open_cards(player, dealer)
+    puts "Your score is: #{player.score}. Dealer's score is #{dealer.score}."
+    puts "Your cards: #{player.cards}."
+    puts "Dealer's cards: #{dealer.cards}."
+  end
+
 end
