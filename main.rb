@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-require './modules/cards.rb'
+require './modules/card_actions.rb'
+require './modules/game_actions.rb'
 require_relative 'gambler'
 require_relative 'interface'
 require_relative 'dealer'

@@ -1,4 +1,6 @@
-module Cards
+# frozen_string_literal: true
+
+module CardActions
   private
 
   def initialize_cards

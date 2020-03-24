@@ -6,7 +6,7 @@ class Gambler
 
   def initialize(name)
     @name = name
-    @money = 100
+    @money = 10
     @score = 0
     @cards = []
   end
@@ -33,6 +33,10 @@ class Gambler
 
   def draw
     @money += 10
+  end
+
+  def reset_bank
+    @money = 100
   end
 
   private
